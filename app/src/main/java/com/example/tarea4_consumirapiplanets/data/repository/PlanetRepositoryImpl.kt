@@ -2,6 +2,7 @@ package com.example.tarea4_consumirapiplanets.data.repository
 import com.example.tarea4_consumirapiplanets.data.remote.DragonBallApi
 import com.example.tarea4_consumirapiplanets.data.remote.Resource
 import com.example.tarea4_consumirapiplanets.data.remote.dtos.PlanetDto
+import com.example.tarea4_consumirapiplanets.data.remote.dtos.PlanetResponseDto
 import com.example.tarea4_consumirapiplanets.domain.repository.PlanetRepository
 import javax.inject.Inject
 
@@ -15,13 +16,20 @@ class PlanetRepositoryImpl @Inject constructor(
         isDestroyed: Boolean?
     ): Resource<List<PlanetDto>> {
         return try {
-            val response = api.getPlanets(page,limit,name,isDestroyed)
-
-            if (response.isSuccessful && response.body() != null) {
-                val data = response.body()!!.items
-                Resource.Success(data)
+            if (name != null) {
+                val response = api.searchPlanetsByName(name)
+                if (response.isSuccessful && response.body() != null) {
+                    Resource.Success(response.body()!!)
+                } else {
+                    Resource.Error("Error del servidor: ${response.message()}")
+                }
             } else {
-                Resource.Error("Error del servidor: ${response.message()}")
+                val response = api.getPlanets(page, limit, isDestroyed)
+                if (response.isSuccessful && response.body() != null) {
+                    Resource.Success(response.body()!!.items)
+                } else {
+                    Resource.Error("Error del servidor: ${response.message()}")
+                }
             }
         } catch (e: Exception) {
             Resource.Error("Error de conexion: ${e.localizedMessage}")

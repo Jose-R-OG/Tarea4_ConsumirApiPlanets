@@ -30,7 +30,7 @@ object AppModule {
     @Singleton
     fun provideApi(moshi: Moshi): DragonBallApi {
         return Retrofit.Builder()
-            .baseUrl("https://dragonball-api.com/api")
+            .baseUrl("https://dragonball-api.com/api/")
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
             .create(DragonBallApi::class.java)

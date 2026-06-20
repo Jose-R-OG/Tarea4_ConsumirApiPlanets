@@ -12,9 +12,13 @@ interface DragonBallApi {
     suspend fun getPlanets(
         @Query("page") page: Int,
         @Query("limit") limit: Int,
-        @Query("name") name: String?,
         @Query("isDestroyed") isDestroyed: Boolean?
     ): Response<PlanetResponseDto>
+
+    @GET("planets")
+    suspend fun searchPlanetsByName(
+        @Query("name") name: String
+    ): Response<List<PlanetDto>>
 
     @GET("planets/{id}")
     suspend fun getPlanetDetail(
