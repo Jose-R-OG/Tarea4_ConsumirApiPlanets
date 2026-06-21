@@ -58,7 +58,7 @@ fun ListPlanetBody(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Dragon Ball Planets") }
+                title = { Text("Dragon Ball Planetas") }
             )
         }
     ) { padding ->
