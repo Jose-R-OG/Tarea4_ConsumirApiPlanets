@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.example.tarea4_consumirapiplanets.data.remote.Resource
-import com.example.tarea4_consumirapiplanets.domain.usecase.GetPlanetDetailUseCase
+import com.example.tarea4_consumirapiplanets.domain.usecase.Planet.GetPlanetDetailUseCase
 import com.example.tarea4_consumirapiplanets.presentation.navigation.DetailScreen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -3,7 +3,7 @@ package com.example.tarea4_consumirapiplanets.presentation.list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tarea4_consumirapiplanets.data.remote.Resource
-import com.example.tarea4_consumirapiplanets.domain.usecase.GetPlanetUseCase
+import com.example.tarea4_consumirapiplanets.domain.usecase.Planet.GetPlanetUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
