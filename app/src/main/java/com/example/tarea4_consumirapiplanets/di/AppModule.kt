@@ -1,8 +1,11 @@
 package com.example.tarea4_consumirapiplanets.di
 
 import com.example.tarea4_consumirapiplanets.data.remote.DragonBallApi
+import com.example.tarea4_consumirapiplanets.data.remote.remotedatasource.CharacterRemoteDataSource
 import com.example.tarea4_consumirapiplanets.data.remote.remotedatasource.PlanetRemoteDataSource
+import com.example.tarea4_consumirapiplanets.data.repository.CharacterRepositoryImpl
 import com.example.tarea4_consumirapiplanets.data.repository.PlanetRepositoryImpl
+import com.example.tarea4_consumirapiplanets.domain.repository.CharacterRepository
 import com.example.tarea4_consumirapiplanets.domain.repository.PlanetRepository
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
@@ -46,5 +49,17 @@ object AppModule {
     @Singleton
     fun provideRepository(remoteDataSource: PlanetRemoteDataSource): PlanetRepository {
         return PlanetRepositoryImpl(remoteDataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCharacterRemoteDataSource(api: DragonBallApi): CharacterRemoteDataSource {
+        return CharacterRemoteDataSource(api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCharacterRepository(remoteDataSource: CharacterRemoteDataSource): CharacterRepository {
+        return CharacterRepositoryImpl(remoteDataSource)
     }
 }

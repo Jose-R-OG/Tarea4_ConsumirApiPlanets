@@ -1,4 +1,4 @@
-package com.example.tarea4_consumirapiplanets.presentation.list
+package com.example.tarea4_consumirapiplanets.presentation.Planet.list
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

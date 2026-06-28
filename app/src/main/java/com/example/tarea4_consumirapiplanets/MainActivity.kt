@@ -10,8 +10,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.tarea4_consumirapiplanets.presentation.detail.DetailPlanetScreen
 import com.example.tarea4_consumirapiplanets.presentation.detail.DetailPlanetViewModel
-import com.example.tarea4_consumirapiplanets.presentation.list.ListPLanetScreen
-import com.example.tarea4_consumirapiplanets.presentation.list.ListPlanetViewModel
+import com.example.tarea4_consumirapiplanets.presentation.Planet.list.ListPLanetScreen
+import com.example.tarea4_consumirapiplanets.presentation.Planet.list.ListPlanetViewModel
 import com.example.tarea4_consumirapiplanets.presentation.navigation.DetailScreen
 import com.example.tarea4_consumirapiplanets.presentation.navigation.ListScreen
 import com.example.tarea4_consumirapiplanets.ui.theme.Tarea4_ConsumirApiPlanetsTheme

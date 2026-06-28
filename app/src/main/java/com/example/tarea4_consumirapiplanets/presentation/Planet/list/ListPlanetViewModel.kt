@@ -1,4 +1,4 @@
-package com.example.tarea4_consumirapiplanets.presentation.list
+package com.example.tarea4_consumirapiplanets.presentation.Planet.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
