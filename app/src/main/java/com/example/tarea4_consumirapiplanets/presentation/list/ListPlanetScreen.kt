@@ -31,7 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
-import com.example.tarea4_consumirapiplanets.data.remote.dtos.PlanetDto
+import com.example.tarea4_consumirapiplanets.domain.model.Planets
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -129,7 +129,7 @@ fun Filters(
 
 @Composable
 fun PlanetItem(
-    planet: PlanetDto,
+    planet: Planets,
     onClick: () -> Unit
 ) {
     ElevatedCard(
@@ -160,8 +160,7 @@ fun PlanetItem(
                     style = MaterialTheme.typography.bodyMedium,
                     color = if (planet.isDestroyed) {
                         MaterialTheme.colorScheme.error
-                    }
-                    else {
+                    } else {
                         MaterialTheme.colorScheme.primary
                     }
                 )

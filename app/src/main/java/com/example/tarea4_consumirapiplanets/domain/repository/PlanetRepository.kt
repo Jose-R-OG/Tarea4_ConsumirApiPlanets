@@ -1,15 +1,16 @@
 package com.example.tarea4_consumirapiplanets.domain.repository
 
 import com.example.tarea4_consumirapiplanets.data.remote.Resource
-import com.example.tarea4_consumirapiplanets.data.remote.dtos.PlanetDto
+import com.example.tarea4_consumirapiplanets.domain.model.Planets
+import kotlinx.coroutines.flow.Flow
 
 interface PlanetRepository {
-    suspend fun getPlanets(
+    fun getPlanets(
         page: Int,
         limit: Int,
         name: String?,
         isDestroyed: Boolean?
-    ): Resource<List<PlanetDto>>
+    ): Flow<Resource<List<Planets>>>
 
-    suspend fun getPlanetDetail(id: Int): Resource<PlanetDto>
+    fun getPlanetDetail(id: Int): Flow<Resource<Planets>>
 }
