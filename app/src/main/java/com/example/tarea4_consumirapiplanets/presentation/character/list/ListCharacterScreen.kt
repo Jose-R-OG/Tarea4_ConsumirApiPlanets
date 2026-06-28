@@ -45,7 +45,7 @@ fun ListCharacterBodyScreen(
                 title = { Text("Personajes Dragon Ball") },
                 navigationIcon = {
                     IconButton(onClick = onOpenDrawer) {
-                        Icon(Icons.Default.Menu, contentDescription = "Abrir Menú")
+                        Icon(Icons.Default.Menu, contentDescription = "Abrir Menu")
                     }
                 }
             )
@@ -111,7 +111,7 @@ fun FilterSection(
             OutlinedTextField(
                 value = name,
                 onValueChange = { onEvent(ListCharacterEvent.UpdateFilters(it, gender, race)) },
-                label = { Text("Nombre (ej. Goku)") },
+                label = { Text("Nombre") },
                 modifier = Modifier.fillMaxWidth()
             )
 
@@ -119,7 +119,7 @@ fun FilterSection(
                 OutlinedTextField(
                     value = gender,
                     onValueChange = { onEvent(ListCharacterEvent.UpdateFilters(name, it, race)) },
-                    label = { Text("Género") },
+                    label = { Text("Genero") },
                     modifier = Modifier.weight(1f)
                 )
                 OutlinedTextField(
