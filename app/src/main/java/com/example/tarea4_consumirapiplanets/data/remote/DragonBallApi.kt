@@ -1,5 +1,7 @@
 package com.example.tarea4_consumirapiplanets.data.remote
 
+import com.example.tarea4_consumirapiplanets.data.remote.dtos.CharacterDto
+import com.example.tarea4_consumirapiplanets.data.remote.dtos.CharacterResponseDto
 import com.example.tarea4_consumirapiplanets.data.remote.dtos.PlanetDto
 import com.example.tarea4_consumirapiplanets.data.remote.dtos.PlanetResponseDto
 import retrofit2.Response
@@ -24,4 +26,18 @@ interface DragonBallApi {
     suspend fun getPlanetDetail(
         @Path("id") id: Int
     ): Response<PlanetDto>
+
+    @GET("characters")
+    suspend fun getCharacters(
+        @Query("page") page: Int,
+        @Query("limit") limit: Int,
+        @Query("name") name: String?,
+        @Query("gender") gender: String?,
+        @Query("race") race: String?
+    ): Response<CharacterResponseDto>
+
+    @GET("characters/{id}")
+    suspend fun getCharacterDetail(
+        @Path("id") id: Int
+    ): Response<CharacterDto>
 }
