@@ -30,11 +30,15 @@ interface DragonBallApi {
     @GET("characters")
     suspend fun getCharacters(
         @Query("page") page: Int,
-        @Query("limit") limit: Int,
+        @Query("limit") limit: Int
+    ): Response<CharacterResponseDto>
+
+    @GET("characters")
+    suspend fun searchCharacters(
         @Query("name") name: String?,
         @Query("gender") gender: String?,
         @Query("race") race: String?
-    ): Response<CharacterResponseDto>
+    ): Response<List<CharacterDto>>
 
     @GET("characters/{id}")
     suspend fun getCharacterDetail(
