@@ -7,3 +7,8 @@ object ListScreen
 
 @Serializable
 data class DetailScreen(val id: Int)
+
+@Serializable
+object CharacterListScreen
+@Serializable
+data class CharacterDetailScreen(val id: Int)

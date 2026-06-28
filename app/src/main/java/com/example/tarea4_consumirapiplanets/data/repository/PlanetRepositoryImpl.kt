@@ -1,51 +1,41 @@
 package com.example.tarea4_consumirapiplanets.data.repository
-import com.example.tarea4_consumirapiplanets.data.remote.DragonBallApi
+
 import com.example.tarea4_consumirapiplanets.data.remote.Resource
-import com.example.tarea4_consumirapiplanets.data.remote.dtos.PlanetDto
-import com.example.tarea4_consumirapiplanets.data.remote.dtos.PlanetResponseDto
+import com.example.tarea4_consumirapiplanets.data.remote.remotedatasource.PlanetRemoteDataSource
+import com.example.tarea4_consumirapiplanets.domain.model.Planets
 import com.example.tarea4_consumirapiplanets.domain.repository.PlanetRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class PlanetRepositoryImpl @Inject constructor(
-    private val api: DragonBallApi
+    private val remoteDataSource: PlanetRemoteDataSource
 ) : PlanetRepository {
-    override suspend fun getPlanets(
+
+    override fun getPlanets(
         page: Int,
         limit: Int,
         name: String?,
         isDestroyed: Boolean?
-    ): Resource<List<PlanetDto>> {
-        return try {
-            if (name != null) {
-                val response = api.searchPlanetsByName(name)
-                if (response.isSuccessful && response.body() != null) {
-                    Resource.Success(response.body()!!)
-                } else {
-                    Resource.Error("Error del servidor: ${response.message()}")
-                }
-            } else {
-                val response = api.getPlanets(page, limit, isDestroyed)
-                if (response.isSuccessful && response.body() != null) {
-                    Resource.Success(response.body()!!.items)
-                } else {
-                    Resource.Error("Error del servidor: ${response.message()}")
-                }
-            }
-        } catch (e: Exception) {
-            Resource.Error("Error de conexion: ${e.localizedMessage}")
+    ): Flow<Resource<List<Planets>>> = flow {
+        emit(Resource.Loading())
+
+        val response = remoteDataSource.getPlanets(page, limit, name, isDestroyed)
+        response.onSuccess { planets ->
+            emit(Resource.Success(planets.items.map { it.toDomain() }))
+        }.onFailure {
+            emit(Resource.Error(it.message ?: "Error desconocido"))
         }
     }
 
-    override suspend fun getPlanetDetail(id: Int): Resource<PlanetDto> {
-        return try {
-            val response = api.getPlanetDetail(id)
-            if (response.isSuccessful && response.body() != null) {
-                Resource.Success(response.body()!!)
-            } else {
-                Resource.Error("Planeta no encontrado.")
-            }
-        } catch (e: Exception) {
-            Resource.Error("Error: ${e.message}")
+    override fun getPlanetDetail(id: Int): Flow<Resource<Planets>> = flow {
+        emit(Resource.Loading())
+
+        val response = remoteDataSource.getPlanetDetail(id)
+        response.onSuccess { planet ->
+            emit(Resource.Success(planet.toDomain()))
+        }.onFailure {
+            emit(Resource.Error(it.message ?: "Error desconocido"))
         }
     }
 }
